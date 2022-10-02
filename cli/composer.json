@@ -11,7 +11,8 @@
   },
   "require": {
     "minicli/minicli": "^3.0",
-    "minicli/command-help": "^0.1.0"
+    "minicli/command-help": "^0.1.0",
+    "minicli/stencil": "^0.1.1"
   },
   "require-dev": {
     "pestphp/pest": "^1.21"

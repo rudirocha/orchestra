@@ -18,6 +18,18 @@ $app = new App([
     'debug' => true
 ]);
 
+/**
+ * Custom code
+ */
+
+foreach (\App\OrchestraServiceDefinition::getOrchestraServices() as $serviceName => $obj) {
+
+    $app->addService($serviceName, $obj);
+}
+/**
+ * End of custom code
+ */
+
 try {
     $app->runCommand($argv);
 } catch (CommandNotFoundException $notFoundException) {
