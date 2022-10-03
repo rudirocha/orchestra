@@ -17,5 +17,5 @@ final class Constants {
     const ORCHESTRA_SOLUTION_VERSION = '0.1';
 
     // paths
-    const ORCHESTRA_TEMPLATE_FOLDER = 'app/Templates';
+    const ORCHESTRA_TEMPLATE_FOLDER = 'Templates';
 }

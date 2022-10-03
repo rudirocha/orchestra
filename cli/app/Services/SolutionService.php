@@ -10,14 +10,18 @@ use Minicli\Stencil;
 
 class SolutionService implements ServiceInterface
 {
-    public function generate(Stencil $solutionStencil, SolutionInterface $solution)
+    private StencilService $stencilService;
+
+    public function generate(SolutionInterface $solution)
     {
-        $content = $solutionStencil->applyTemplate(Constants::ORCHESTRA_TEMPLATE_SOLUTION, $solution->toArray());
-            file_put_contents($solution->getPath(), $content);
+        $content = $this->stencilService
+        ->applyTemplate(Constants::ORCHESTRA_TEMPLATE_SOLUTION, $solution->toArray());
+        
+        file_put_contents($solution->getPath(), $content);
     }
 
     public function load(App $app): void
     {
-        
+        $this->stencilService = $app->stencilService;
     }
 }

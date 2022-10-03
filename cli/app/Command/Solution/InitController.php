@@ -1,10 +1,9 @@
 <?php
-namespace App\Command\Project;
+namespace App\Command\Solution;
 
 use App\Constants;
 use App\Models\Solution;
 use App\Models\SolutionInterface;
-use App\Services\SolutionService;
 use Minicli\Command\CommandController;
 use Minicli\Stencil;
 
@@ -34,36 +33,19 @@ class InitController extends CommandController
         } else {
             $this->getPrinter()->info('Creating the Orchestra file...');
             
-            $solutionStencil = $this->getSolutionStencil();
-            $solution = $this->createSolution($manifestFile);
+            $solution = new Solution(
+                $this->hasParam(Constants::ORCHESTRA_SOLUTION_NAME) ? $this->getParam(Constants::ORCHESTRA_SOLUTION_NAME) : Constants::ORCHESTRA_SOLUTION_NAME_DEFAULT,
+                Constants::ORCHESTRA_SOLUTION_VERSION,
+                $manifestFile
+            );
 
-            $this->getApp()->solutionService->generate($solutionStencil, $solution);
+            $this->getApp()->solutionService->generate($solution);
 
-            
             $this->getPrinter()->success(
                 sprintf('[%s] successfuly created.', $manifestFile),
                 true
             );
             $this->getPrinter()->newline();
         }
-    }
-
-    private function getSolutionStencil(): Stencil
-    {
-        return  new Stencil(
-            sprintf('%s/%s', 
-            $this->getApp()->getAppRoot(),
-            Constants::ORCHESTRA_TEMPLATE_FOLDER)
-        );
-    }
-
-    private function createSolution(string $filePath) : SolutionInterface
-    {
-        $this->getPrinter()->display($filePath, true);
-        return new Solution(
-            $this->hasParam(Constants::ORCHESTRA_SOLUTION_NAME) ? $this->getParam(Constants::ORCHESTRA_SOLUTION_NAME) : Constants::ORCHESTRA_SOLUTION_NAME_DEFAULT,
-            Constants::ORCHESTRA_SOLUTION_VERSION,
-            $filePath
-        );
     }
 }
