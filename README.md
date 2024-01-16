@@ -1,3 +1,4 @@
+![Orchestra](resources/orchestra_banner.png)
 # Orchestra
 
 Orchestra is a vscode extension supporting the development of Symfony Framework projects.
