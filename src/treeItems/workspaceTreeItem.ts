@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { TreeItemType } from '../enums/treeItemType';
 import { PHPProject } from '../entities/phpProject';
 
 export class WorkspaceTreeItem extends vscode.TreeItem {
@@ -7,8 +6,7 @@ export class WorkspaceTreeItem extends vscode.TreeItem {
 		public readonly label: string,
 		public readonly description: string,
 		public readonly collapsibleState: vscode.TreeItemCollapsibleState,
-        public readonly phpProject: PHPProject,
-        public readonly treeItemType: TreeItemType | undefined
+        public readonly phpProject: PHPProject
 	) {
 		super(label, collapsibleState);
 		this.tooltip = `${this.label}`;

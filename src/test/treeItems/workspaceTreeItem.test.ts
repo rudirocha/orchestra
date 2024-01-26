@@ -1,7 +1,6 @@
 import * as assert from 'assert';
 import { WorkspaceTreeItem } from '../../treeItems/workspaceTreeItem';
 import { TreeItemCollapsibleState } from 'vscode';
-import { TreeItemType } from '../../enums/treeItemType';
 import { PHPProject } from '../../entities/phpProject';
 import * as path from 'path';
 
@@ -11,8 +10,7 @@ suite('Workspace Tree Item', () => {
             'the Label',
             ' A description',
             TreeItemCollapsibleState.None,
-            new PHPProject(path.resolve('src/test/mocks/composerFiles/valid')),
-            TreeItemType.Workspace
+            new PHPProject(path.resolve('src/test/mocks/composerFiles/valid'))
          );
         assert.strictEqual(workspaceTreeItem.label, 'the Label');
         assert.strictEqual(workspaceTreeItem.tooltip, workspaceTreeItem.label);
