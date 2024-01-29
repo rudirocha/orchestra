@@ -21,8 +21,8 @@ export class ProfileInspector {
         ProfilerCsvParser.getProfileRows(profilerPath).forEach((profile: SymfonyProfile) => {
             treeItems.push(
                 new ProfileTreeItem(
-                    `${profile.token} - ${profile.statusCode}`,
-                    `[${profile.httpMethod}]`,
+                    `${profile.token} - HTTP ${profile.statusCode}`,
+                    '',
                     profile
                 )
             );

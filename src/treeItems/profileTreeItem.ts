@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
 import { SymfonyProfile } from '../entities/symfonyProfile';
 
 export class ProfileTreeItem extends vscode.TreeItem {
@@ -18,5 +19,11 @@ export class ProfileTreeItem extends vscode.TreeItem {
                 ]
             };
         }
+
+        this.iconPath = {
+            light: path.join(__filename, '..', '..', '..', 'resources', 'light', (profileObject.httpMethod || '').toLowerCase()+'.svg'),
+            dark: path.join(__filename, '..', '..', '..', 'resources', 'dark',  (profileObject.httpMethod || '').toLowerCase()+'.svg')
+          };
+
     }
 }
