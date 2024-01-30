@@ -3,6 +3,11 @@
   "displayName": "Orchestra",
   "description": "Symfony Framework development helper",
   "version": "0.2.0",
+  "qna": "https://github.com/rudirocha/orchestra/labels/question",
+  "preview": true,
+  "icon": "resources/orchestra-logo.png",
+  "pricing": "Free",
+  "publisher": "rudirocha",
   "repository": {
     "type": "git",
     "url": "https://github.com/rudirocha/orchestra.git"
@@ -12,6 +17,9 @@
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "symfony", "php", "profile", "debug"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
