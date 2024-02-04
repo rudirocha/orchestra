@@ -14,11 +14,17 @@ export class ProfileInspector {
 
     }
 
-    static buildProfileTreeItems(phpProject: PHPProject): ProfileTreeItem[] {
+    static buildProfileTreeItems(phpProject: PHPProject, sortDescending: boolean = true): ProfileTreeItem[] {
         const profilerPath = `${phpProject.rootPath}${phpProject.getProfilerFilePath()}`;
         const treeItems: Array<ProfileTreeItem> = [];
 
-        ProfilerCsvParser.getProfileRows(profilerPath).forEach((profile: SymfonyProfile) => {
+        let profiles = ProfilerCsvParser.getProfileRows(profilerPath);
+
+        if (sortDescending) {
+            profiles = profiles.sort((a,b) => (a.createdAt > b.createdAt ? 1 : -1));
+        }
+ 
+        profiles.forEach((profile: SymfonyProfile) => {
             treeItems.push(
                 new ProfileTreeItem(
                     `${profile.token} - HTTP ${profile.statusCode}`,
