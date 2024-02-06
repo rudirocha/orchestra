@@ -38,7 +38,7 @@
       "view/title": [
         {
           "command": "orchestra.refreshProfiles",
-          "when": "view == symfonyDebugProfiles",
+          "when": "view == symfony-profiler",
           "group": "navigation"
         }
       ]
@@ -55,8 +55,8 @@
     "views": {
       "orchestra": [
         {
-          "id": "symfonyDebugProfiles",
-          "name": "Debug Profiles"
+          "id": "symfony-profiler",
+          "name": "Symfony Profiler"
         }
       ]
     }

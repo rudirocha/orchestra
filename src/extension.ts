@@ -3,7 +3,7 @@ import { SymfonyProfilerProvider } from './providers/SymfonyProfilerProvider';
 
 export function activate(context: vscode.ExtensionContext) {
 	const symfonyProfiler = new SymfonyProfilerProvider();
-	vscode.window.registerTreeDataProvider('symfonyDebugProfiles', symfonyProfiler);
+	vscode.window.registerTreeDataProvider('symfony-profiler', symfonyProfiler);
 	vscode.commands.registerCommand('orchestra.refreshProfiles', () =>
 		symfonyProfiler.refresh()
 	);
