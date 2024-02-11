@@ -2,12 +2,13 @@ import * as vscode from 'vscode';
 import { WorkspaceInspector } from '../inspectors/workspaceInspector';
 import { WorkspaceTreeItem } from '../treeItems/workspaceTreeItem';
 import { ProfileInspector } from '../inspectors/profilerInspector';
-
+import { SortTypes } from '../enums/sortTypes';
 
 export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
-	
+
 	private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | null | void> = new vscode.EventEmitter<vscode.TreeItem | undefined | null | void>();
-    readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
+	readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
+	private profilerSortType: SortTypes = SortTypes.DESC;
 
 	getTreeItem(element: WorkspaceTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
 		return element;
@@ -16,7 +17,10 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 		const sessions: vscode.TreeItem[] = new Array();
 
 		if (element && element instanceof WorkspaceTreeItem) {
-			sessions.push(...ProfileInspector.buildProfileTreeItems(element.phpProject));
+			sessions.push(...ProfileInspector.buildProfileTreeItems(
+				element.phpProject,
+				this.profilerSortType === SortTypes.DESC
+			));
 
 			if (sessions.length === 0) {
 				sessions.push(new vscode.TreeItem('No sessions detected', vscode.TreeItemCollapsibleState.None));
@@ -48,7 +52,8 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 		throw new Error('Method not implemented.');
 	}
 
-	refresh() {
+	refresh(sortType: SortTypes) {
+		this.profilerSortType = sortType;
 		this._onDidChangeTreeData.fire();
 	}
 
