@@ -32,6 +32,14 @@
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
         }
+      },
+      {
+        "command": "orchestra.refreshProfilesAsc",
+        "title": "Sort ASC"
+      },
+      {
+        "command": "orchestra.refreshProfilesDesc",
+        "title": "Sort DESC"
       }
     ],
     "menus": {
@@ -40,6 +48,14 @@
           "command": "orchestra.refreshProfiles",
           "when": "view == symfony-profiler",
           "group": "navigation"
+        },
+        {
+          "command": "orchestra.refreshProfilesAsc",
+          "when": "view == symfony-profiler && orchestra.profiler.sort !== 1"
+        },
+        {
+          "command": "orchestra.refreshProfilesDesc",
+          "when": "view == symfony-profiler && orchestra.profiler.sort === 1"
         }
       ]
     },
