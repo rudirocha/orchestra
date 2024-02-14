@@ -7,7 +7,8 @@ export function activate(context: vscode.ExtensionContext) {
 	/**
 	 * Context keys
 	 */
-	context.globalState.update(ContextVariables.ProfilerSortType, SortTypes.DESC);
+
+	setProfilerSortType(context, SortTypes.DESC);
 
 	/**
 	 * Providers
@@ -19,18 +20,25 @@ export function activate(context: vscode.ExtensionContext) {
 	 * Commands
 	 */
 	vscode.commands.registerCommand('orchestra.refreshProfiles', () =>
-		symfonyProfiler.refresh(context.globalState.get(ContextVariables.ProfilerSortType) || SortTypes.DESC)
+		symfonyProfiler.refresh(
+			context.globalState.get(ContextVariables.ProfilerSortType) || SortTypes.DESC
+		)
 	);
 	vscode.commands.registerCommand('orchestra.refreshProfilesDesc', () => {
 		symfonyProfiler.refresh(SortTypes.DESC);
-		context.globalState.update(ContextVariables.ProfilerSortType, SortTypes.DESC);
+		setProfilerSortType(context, SortTypes.DESC);
 	}
 	);
 	vscode.commands.registerCommand('orchestra.refreshProfilesAsc', () => {
 		symfonyProfiler.refresh(SortTypes.ASC);
-		context.globalState.update(ContextVariables.ProfilerSortType, SortTypes.ASC);
+		setProfilerSortType(context, SortTypes.ASC);
 	}
 	);
 }
 
 export function deactivate() { }
+
+function setProfilerSortType(context: vscode.ExtensionContext, type: SortTypes) {
+	context.globalState.update(ContextVariables.ProfilerSortType, type);
+	vscode.commands.executeCommand('setContext', ContextVariables.ProfilerSortType, type);
+}
