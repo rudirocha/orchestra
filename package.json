@@ -2,7 +2,7 @@
   "name": "orchestra",
   "displayName": "Orchestra",
   "description": "Symfony Framework development helper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "qna": "https://github.com/rudirocha/orchestra/labels/question",
   "preview": true,
   "icon": "resources/orchestra-logo.png",

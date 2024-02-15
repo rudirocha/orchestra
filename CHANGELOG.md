@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.2.2] - 15/Feb/2024
+- Add profiler sort ASC / DESC
+
 ## [0.2.1] - 30/Jan/2024
 - Enhance extention's manifest file
   - Add Q&A Link, and other minot attributes
