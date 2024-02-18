@@ -15,31 +15,32 @@ export class ProfilerCsvParser {
                 skip_empty_lines: true
             }
             );
-            let rootProfiles = rows.filter((r: { parent: string; }) => r.parent === '');
+            
+            rows
+                .filter((r: { parent: string; }) => r.parent === '')
+                .forEach((row: any) => {
 
-            rootProfiles.forEach((row: any) => {
+                    const profile = new SymfonyProfile(
+                        row.token,
+                        row.idAddress,
+                        row.method,
+                        row.url,
+                        row.statusCode,
+                        new Date(row.time)
+                    );
+                    profile.childProfiles.push(...this.getProfilesByParent(profile.token, rows));
 
-                const profile = new SymfonyProfile(
-                    row.token,
-                    row.idAddress,
-                    row.method,
-                    row.url,
-                    row.statusCode,
-                    new Date(row.time)
-                );
-                profile.childProfiles.push(...this.getProfilesByParent(profile.token, rows));
-
-                profiles.push(profile);
-            });
+                    profiles.push(profile);
+                });
         }
         return profiles;
     }
 
-    static getProfilesByParent(parent:string, profilesList:any ) {
+    static getProfilesByParent(parent: string, profilesList: any) {
         const childProfiles = profilesList.filter((r: { parent: string; }) => r.parent === parent);
 
         if (!childProfiles) { return []; }
-        const profiles:Array<SymfonyProfile> = [];
+        const profiles: Array<SymfonyProfile> = [];
 
         childProfiles.forEach((p: any) => {
 
