@@ -26,14 +26,18 @@ export class ProfileInspector {
  
         profiles.forEach((profile: SymfonyProfile) => {
             treeItems.push(
-                new ProfileTreeItem(
-                    `${profile.token} - HTTP ${profile.statusCode}`,
-                    '',
-                    profile
-                )
+                this.buildProfileTreeItem(profile)
             );
         });
         
         return treeItems;
     } 
+
+    static buildProfileTreeItem(profile: SymfonyProfile) {
+        return new ProfileTreeItem(
+            `${profile.token} - HTTP ${profile.statusCode}`,
+            '',
+            profile
+        );
+    }
 }

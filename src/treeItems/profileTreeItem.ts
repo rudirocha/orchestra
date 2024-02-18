@@ -8,7 +8,7 @@ export class ProfileTreeItem extends vscode.TreeItem {
 		public readonly description: string,
         public readonly profileObject: SymfonyProfile
     ) {
-        super(label, vscode.TreeItemCollapsibleState.None);
+        super(label, profileObject.childProfiles.length > 0 ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None);
         
         if (profileObject.url) {
             this.command = {
