@@ -5,7 +5,8 @@ export class SymfonyProfile {
         public readonly httpMethod: string,
         public readonly url: string,
         public readonly statusCode: string,
-        public readonly createdAt: Date
+        public readonly createdAt: Date,
+        public readonly childProfiles: Array<SymfonyProfile> = []
     ) {}
 
     getProfileWebLink() {

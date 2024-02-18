@@ -3,6 +3,7 @@ import { WorkspaceInspector } from '../inspectors/workspaceInspector';
 import { WorkspaceTreeItem } from '../treeItems/workspaceTreeItem';
 import { ProfileInspector } from '../inspectors/profilerInspector';
 import { SortTypes } from '../enums/sortTypes';
+import { ProfileTreeItem } from '../treeItems/profileTreeItem';
 
 export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
@@ -26,6 +27,11 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 				sessions.push(new vscode.TreeItem('No sessions detected', vscode.TreeItemCollapsibleState.None));
 			}
 
+		} else if (element && element instanceof ProfileTreeItem) {
+			element.profileObject.childProfiles.forEach((p => {
+				sessions.push(ProfileInspector.buildProfileTreeItem(p));
+			}));
+
 		} else {
 			const workspaceFolders = vscode.workspace.workspaceFolders;
 			// Validate the workspace is not empty
@@ -46,10 +52,10 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 	}
 
 	getParent?(element: WorkspaceTreeItem): vscode.ProviderResult<WorkspaceTreeItem> {
-		throw new Error('Method not implemented.');
+		throw new Error('getParent :: Method not implemented.');
 	}
 	resolveTreeItem?(item: vscode.TreeItem, element: WorkspaceTreeItem, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TreeItem> {
-		throw new Error('Method not implemented.');
+		throw new Error('resolveTreeItem :: Method not implemented.');
 	}
 
 	refresh(sortType: SortTypes) {
