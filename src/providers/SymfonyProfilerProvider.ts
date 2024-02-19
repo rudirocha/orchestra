@@ -11,6 +11,10 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 	readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
 	private profilerSortType: SortTypes = SortTypes.DESC;
 
+	constructor() {
+        setInterval(() => this._onDidChangeTreeData.fire(), 1000);
+    }
+
 	getTreeItem(element: WorkspaceTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
 		return element;
 	}
