@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.3.0] - 20/Feb/2024
+- Add profiler list auto-refresh
+
 ## [0.2.2] - 15/Feb/2024
 - Add profiler sort ASC / DESC
 
