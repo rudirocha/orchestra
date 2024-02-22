@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.3.1] - 22/Feb/2024
+- Fix profiler reloader when no workspace folders are added
+- Introduce isTrusted workspace validator for inspecting profiles
+
 ## [0.3.0] - 20/Feb/2024
 - Add profiler list auto-refresh
 
