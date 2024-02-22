@@ -12,7 +12,12 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 	private profilerSortType: SortTypes = SortTypes.DESC;
 
 	constructor() {
-        setInterval(() => this._onDidChangeTreeData.fire(), 1000);
+        setInterval(() => {
+			if (vscode.workspace.isTrusted && vscode.workspace.workspaceFolders?.length) {
+				this._onDidChangeTreeData.fire();
+			}
+		}
+			, 1000);
     }
 
 	getTreeItem(element: WorkspaceTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
@@ -40,8 +45,9 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 			const workspaceFolders = vscode.workspace.workspaceFolders;
 			// Validate the workspace is not empty
 			if (workspaceFolders === undefined ||
-				workspaceFolders?.length === 0) {
-				vscode.window.showInformationMessage(`Workspace is empty. Cannot look for Symfony execution profiles`);
+				workspaceFolders?.length === 0 ||
+				!vscode.workspace.isTrusted) {
+				vscode.window.showInformationMessage(`Workspace is empty or not trusted. Cannot look for Symfony execution profiles`);
 				return Promise.resolve([]);
 			}
 
