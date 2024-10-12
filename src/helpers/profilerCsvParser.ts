@@ -24,7 +24,7 @@ export class ProfilerCsvParser {
                         row.token,
                         row.idAddress,
                         row.method,
-                        row.url,
+                        new URL(row.url).host,
                         row.statusCode,
                         new Date(row.time)
                     );

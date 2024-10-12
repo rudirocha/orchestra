@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.3.3] - 13/Oct/2024
+- Fix profiler url launcher
+- increase profile list refresh timer
+
 ## [0.3.2] - 01/Mar/2024
 - Add Docs about Profiler
 

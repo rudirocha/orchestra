@@ -10,6 +10,6 @@ export class SymfonyProfile {
     ) {}
 
     getProfileWebLink() {
-        return `${this.url}_profiler/${this.token}`;
+        return `${this.url}/_profiler/${this.token}`;
     }
 }

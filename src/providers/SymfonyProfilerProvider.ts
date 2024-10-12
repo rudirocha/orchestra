@@ -17,7 +17,7 @@ export class SymfonyProfilerProvider implements vscode.TreeDataProvider<vscode.T
 				this._onDidChangeTreeData.fire();
 			}
 		}
-			, 1000);
+			, 10000);
     }
 
 	getTreeItem(element: WorkspaceTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
